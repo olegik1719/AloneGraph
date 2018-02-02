@@ -4,13 +4,17 @@ import java.util.*;
 
 public interface SimpleGraph<T>{
     /**
+     * Add vertex to graph structure
      *
-     * @param vertex
-     * @return
+     * @param vertex to adding
+     * @return updated graph.
      */
 
     SimpleGraph<T> addVertex(T vertex);
+    SimpleGraph<T> removeVertex(T vertex);
+
     SimpleGraph<T> addEdge(T begin, T end);
+    SimpleGraph<T> RemoveEdge(T begin, T end);
 
     Collection<T> vertices();
     Collection<T> neighbours(T vertex);
@@ -45,7 +49,7 @@ public interface SimpleGraph<T>{
 
     default SimpleGraph<T>  addEdges(T vertex, T... neighbours){
         Arrays.asList(neighbours)
-                .forEach(integer -> addEdge(vertex,integer));
+                .forEach(neighbour -> addEdge(vertex,neighbour));
         return this;
     }
 }

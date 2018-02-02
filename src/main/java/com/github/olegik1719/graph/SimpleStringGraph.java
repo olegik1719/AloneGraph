@@ -20,9 +20,22 @@ public class SimpleStringGraph implements SimpleGraph<String> {
     }
 
     @Override
+    public SimpleGraph<String> removeVertex(String vertex) {
+        graph.remove(vertex);
+        return this;
+    }
+
+    @Override
     public SimpleStringGraph addEdge(String begin, String end) {
         graph.computeIfAbsent(begin, s-> new HashSet<>()).add(end);
         graph.computeIfAbsent(end, s-> new HashSet<>()).add(begin);
+        return this;
+    }
+
+    @Override
+    public SimpleGraph<String> RemoveEdge(String begin, String end) {
+        graph.get(begin).remove(end);
+        graph.get(end).remove(begin);
         return this;
     }
 
