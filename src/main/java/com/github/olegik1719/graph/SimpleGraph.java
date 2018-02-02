@@ -1,9 +1,6 @@
 package com.github.olegik1719.graph;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public interface SimpleGraph<T>{
     /**
@@ -12,8 +9,8 @@ public interface SimpleGraph<T>{
      * @return
      */
 
-    boolean addVertex(T vertex);
-    boolean addEdge(T begin, T end);
+    SimpleGraph<T> addVertex(T vertex);
+    SimpleGraph<T> addEdge(T begin, T end);
 
     Collection<T> vertices();
     Collection<T> neighbours(T vertex);
@@ -43,5 +40,12 @@ public interface SimpleGraph<T>{
                 neighbours(current).forEach(s -> {if(notUsedDFS.get(s))forCheck.push(s);});
         }
         return current.equals(end);
+    }
+
+
+    default SimpleGraph<T>  addEdges(T vertex, T... neighbours){
+        Arrays.asList(neighbours)
+                .forEach(integer -> addEdge(vertex,integer));
+        return this;
     }
 }
